@@ -1,15 +1,28 @@
-using Uania.Tools.Infrastructure.Rijndael;
-using Uania.Tools.Infrastructure.Rijndael.Impl;
+using Uania.Tools.Infrastructure.Module;
 
 namespace Uania.Tools.Web
 {
-    public static class Module
+    public static class Module 
     {
-        public static IServiceCollection AddDependency(this IServiceCollection services, IConfiguration configuration)
+        /// <summary>
+        /// 注册已引用的模块中的服务
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        public static IServiceCollection RegisterService(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IRijndaelService, RijndaelServiceImpl>(s => new RijndaelServiceImpl(configuration["RijndaelConfig:Key"]));
-
+            using var module = new Infrastructure.InfrstructureModule();
+            module.RegisterService(services, configuration);
             return services;
+        }
+
+        /// <summary>
+        /// 模块初始化
+        /// </summary>
+        public static void Initialize()
+        {
+
         }
     }
 }
