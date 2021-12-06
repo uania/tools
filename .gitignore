@@ -2,3 +2,9 @@ src/Uania.Tools.Web/obj/*
 src/Uania.Tools.Web/bin/*
 src/Uania.Tools.Infrastructure/obj/*
 src/Uania.Tools.Infrastructure/bin/*
+src/Uania.Tools.Models/obj/*
+src/Uania.Tools.Models/bin/*
+src/Uania.Tools.Services/obj/*
+src/Uania.Tools.Services/bin/*
+src/Uania.Tools.Repository/bin/*
+src/Uania.Tools.Repository/obj/*
