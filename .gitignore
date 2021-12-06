@@ -1,1 +1,4 @@
 src/Uania.Tools.Web/obj/*
+src/Uania.Tools.Web/bin/*
+src/Uania.Tools.Infrastructure/obj/*
+src/Uania.Tools.Infrastructure/bin/*
