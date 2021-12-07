@@ -4,6 +4,22 @@ namespace Uania.Tools.Services.RepositoryServices.UserGroup
 {
     public interface IUserGroupServices
     {
-        public Task<List<UserGroupUsers>> GetUserGroups();
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
+        public Task<List<UserGroupUsers>?> GetUserGroupUsers();
+
+        /// <summary>
+        /// 获取leader申请列表
+        /// </summary>
+        /// <returns></returns>
+        public Task<List<UserGroupApply>?> GetUserGroupApplys();
+
+        /// <summary>
+        /// 获取未加密的数据进行加密后存储
+        /// </summary>
+        /// <returns></returns>
+        public Task<string> EntryptData();
     }
 }

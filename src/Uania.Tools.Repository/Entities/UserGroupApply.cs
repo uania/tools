@@ -1,24 +1,18 @@
-namespace Uania.Tools.Models.UserGroup
+namespace Uania.Tools.Repository.Entities
 {
-    public class UserGroupUsers
+    public class UserGroupApply : BaseEntity
     {
-        /// <summary>
-        /// 主键
-        /// </summary>
-        /// <value></value>
-        public Guid Id { get; set; }
-
         /// <summary>
         /// 用户名
         /// </summary>
         /// <value></value>
-        public string? UserName { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// 手机号
         /// </summary>
         /// <value></value>
-        public string? MobilePhone { get; set; }
+        public string? Phone { get; set; }
 
         /// <summary>
         /// 邮箱
@@ -30,6 +24,6 @@ namespace Uania.Tools.Models.UserGroup
         /// 公司名称
         /// </summary>
         /// <value></value>
-        public string? CompanyName { get; set; }
+        public string? Company { get; set; }
     }
 }

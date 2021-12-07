@@ -12,5 +12,7 @@ namespace Uania.Tools.Repository.DataBase.Models
 
         public DbSet<UserGroupUsers>? UserGroupUsers { get; set; }
 
+        public DbSet<UserGroupApply>? UserGroupApply { get; set; }
+
     }
 }

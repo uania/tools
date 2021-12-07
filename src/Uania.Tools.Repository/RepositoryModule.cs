@@ -26,7 +26,8 @@ namespace Uania.Tools.Repository
         /// <returns></returns>
         public override void RegisterService(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IUserGroupRepository, UserGroupRepository>();
+            services.AddScoped<IUserGroupUsersRepository, UserGroupUsersRepository>();
+            services.AddScoped<IUserGroupApplyRepository, UserGroupApplyRepository>();
             services.AddDbContext<BaseDbContext>(opt =>
             {
                 opt.UseSqlServer(configuration["ConnectionStrings:SqlServerConnection"]);

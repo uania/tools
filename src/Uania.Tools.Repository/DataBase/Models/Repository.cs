@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Uania.Tools.Repository.DataBase.Models
@@ -26,6 +27,16 @@ namespace Uania.Tools.Repository.DataBase.Models
             return Table.Where(r => 1 == 1).ToListAsync();
         }
 
+        public virtual Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return Table.Where(predicate).ToListAsync();
+        }
+
+        public virtual async Task<int> Update(List<TEntity> entities)
+        {
+            return await _dbContext.SaveChangesAsync();
+        }
+
         protected virtual void AttachIfNot(TEntity entity)
         {
             var entry = _dbContext.ChangeTracker.Entries().FirstOrDefault(ent => ent.Entity == entity);
@@ -38,12 +49,11 @@ namespace Uania.Tools.Repository.DataBase.Models
         }
     }
 
-    public class Repository<TEntity> : RepositoryBase<TEntity, Guid>, IRepository<TEntity> where TEntity : class, IEntity<Guid>
+    public abstract class Repository<TEntity> : RepositoryBase<TEntity, Guid>, IRepository<TEntity> where TEntity : class, IEntity<Guid>
     {
         public Repository(BaseDbContext dbContext) : base(dbContext)
         {
 
         }
-
     }
 }

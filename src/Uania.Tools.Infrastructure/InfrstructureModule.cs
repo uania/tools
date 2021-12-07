@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Uania.Tools.Infrastructure.Rijndael;
 using Uania.Tools.Infrastructure.Rijndael.Impl;
 using Uania.Tools.Infrastructure.Module;
+using Uania.Tools.Infrastructure.RegValidator;
+using Uania.Tools.Infrastructure.RegValidator.Impl;
 
 namespace Uania.Tools.Infrastructure
 {
@@ -26,6 +28,7 @@ namespace Uania.Tools.Infrastructure
         public override void RegisterService(IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IRijndaelService, RijndaelServiceImpl>(sp => new RijndaelServiceImpl(configuration["RijndaelConfig:Key"]));
+            services.AddSingleton<IRegValidatorServices, RegValidatorServicesImpl>();
         }
 
         /// <summary>
