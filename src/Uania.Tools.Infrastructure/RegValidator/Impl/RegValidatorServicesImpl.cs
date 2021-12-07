@@ -4,14 +4,14 @@ namespace Uania.Tools.Infrastructure.RegValidator.Impl
 {
     public class RegValidatorServicesImpl : IRegValidatorServices
     {
-        public bool IsEmail(string? phoneNumber)
+        public bool IsPhoneNumber(string? phoneNumber)
         {
             if (string.IsNullOrWhiteSpace(phoneNumber))
                 return false;
             return Regex.IsMatch(phoneNumber, @"^\d{11}$");
         }
 
-        public bool IsPhoneNumber(string? email)
+        public bool IsEmail(string? email)
         {
             if (string.IsNullOrWhiteSpace(email))
                 return false;

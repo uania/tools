@@ -65,5 +65,22 @@ namespace Uania.Tools.Web.Controllers
             };
             return res;
         }
+
+        /// <summary>
+        /// 解密users、apply表的手机号、邮箱、姓名、公司字段
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ResponseBase<string>> DetryptData()
+        {
+            var message = await _userGroupServices.DetryptData();
+            var res = new ResponseBase<string>
+            {
+                Code = ResponseCodeEnum.Success,
+                Message = "请求成功",
+                Data = message
+            };
+            return res;
+        }
     }
 }
