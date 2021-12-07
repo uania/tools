@@ -121,5 +121,64 @@ namespace Uania.Tools.Services.RepositoryServices.UserGroup.Impl
 
             return $"users表加密{userAffected}行；apply表加密{applyAffected}行；";
         }
+
+        /// <summary>
+        /// 获取加密数据解密后存储
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> DetryptData()
+        {
+            int userAffected = 0;
+            int applyAffected = 0;
+            //处理用户表
+            var originUsersData = await _userGroupUsersRepository.GetListAsync();
+            if (originUsersData != null && originUsersData.Any())
+            {
+                var users = new List<Repository.Entities.UserGroupUsers>();
+                foreach (var user in originUsersData)
+                {
+                    if (!_regValidatorServices.IsPhoneNumber(user.MobilePhone) && !_regValidatorServices.IsEmail(user.Email))
+                    {
+                        if (!string.IsNullOrWhiteSpace(user.UserName))
+                            user.UserName = _rijndaelService.DecryptString(user.UserName);
+                        if (!string.IsNullOrWhiteSpace(user.Email))
+                            user.Email = _rijndaelService.DecryptString(user.Email);
+                        if (!string.IsNullOrWhiteSpace(user.MobilePhone))
+                            user.MobilePhone = _rijndaelService.DecryptString(user.MobilePhone);
+                        if (!string.IsNullOrWhiteSpace(user.CompanyName))
+                            user.CompanyName = _rijndaelService.DecryptString(user.CompanyName);
+
+                        users.Add(user);
+                    }
+                }
+                userAffected = await _userGroupUsersRepository.Update(users);
+            }
+
+            //处理leader申请表
+            var originApplyData = await _userGroupApplyRepository.GetListAsync();
+            if (originApplyData != null && originApplyData.Any())
+            {
+                var applys = new List<Repository.Entities.UserGroupApply>();
+                foreach (var apply in originApplyData)
+                {
+                    if (!_regValidatorServices.IsPhoneNumber(apply.Phone) && !_regValidatorServices.IsEmail(apply.Email))
+                    {
+                        if (!string.IsNullOrWhiteSpace(apply.Name))
+                            apply.Name = _rijndaelService.DecryptString(apply.Name);
+                        if (!string.IsNullOrWhiteSpace(apply.Email))
+                            apply.Email = _rijndaelService.DecryptString(apply.Email);
+                        if (!string.IsNullOrWhiteSpace(apply.Phone))
+                            apply.Phone = _rijndaelService.DecryptString(apply.Phone);
+                        if (!string.IsNullOrWhiteSpace(apply.Company))
+                            apply.Company = _rijndaelService.DecryptString(apply.Company);
+
+                        applys.Add(apply);
+                    }
+                }
+                applyAffected = await _userGroupApplyRepository.Update(applys);
+            }
+
+            return $"users表解密{userAffected}行；apply表解密{applyAffected}行；";
+        }
     }
 }

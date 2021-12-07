@@ -21,5 +21,11 @@ namespace Uania.Tools.Services.RepositoryServices.UserGroup
         /// </summary>
         /// <returns></returns>
         public Task<string> EntryptData();
+
+        /// <summary>
+        /// 获取加密数据解密后存储
+        /// </summary>
+        /// <returns></returns>
+        public Task<string> DetryptData();
     }
 }
