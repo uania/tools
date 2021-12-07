@@ -1,8 +1,9 @@
-using Uania.Tools.Infrastructure.Module;
+using Uania.Tools.Infrastructure;
+using Uania.Tools.Services;
 
 namespace Uania.Tools.Web
 {
-    public static class Module 
+    public static class Module
     {
         /// <summary>
         /// 注册已引用的模块中的服务
@@ -12,8 +13,10 @@ namespace Uania.Tools.Web
         /// <returns></returns>
         public static IServiceCollection RegisterService(this IServiceCollection services, IConfiguration configuration)
         {
-            using var module = new Infrastructure.InfrstructureModule();
+            using var module = new InfrstructureModule();
             module.RegisterService(services, configuration);
+            using var servicesModule = new ServicesModule();
+            servicesModule.RegisterService(services, configuration);
             return services;
         }
 

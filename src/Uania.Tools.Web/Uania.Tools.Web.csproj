@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="../Uania.Tools.Infrastructure/Uania.Tools.Infrastructure.csproj" />
+    <ProjectReference Include="../Uania.Tools.Services/Uania.Tools.Services.csproj" />
+    <ProjectReference Include="../Uania.Tools.Models/Uania.Tools.Models.csproj" />
   </ItemGroup>
 
 </Project>

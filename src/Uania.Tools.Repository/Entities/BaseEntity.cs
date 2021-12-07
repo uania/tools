@@ -1,4 +1,4 @@
-using Uania.Tools.Infrastructure.DataBase.Models;
+using Uania.Tools.Repository.DataBase.Models;
 
 namespace Uania.Tools.Repository.Entities
 {

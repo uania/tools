@@ -1,12 +1,14 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Uania.Tools.Infrastructure.Rijndael;
-using Uania.Tools.Infrastructure.Rijndael.Impl;
+using Uania.Tools.Infrastructure;
 using Uania.Tools.Infrastructure.Module;
+using Uania.Tools.Repository;
+using Uania.Tools.Services.RepositoryServices.UserGroup;
+using Uania.Tools.Services.RepositoryServices.UserGroup.Impl;
 
-namespace Uania.Tools.Infrastructure
+namespace Uania.Tools.Services
 {
-    public class InfrstructureModule : ModuleBase, IModule
+    public class ServicesModule : ModuleBase, IModule
     {
         /// <summary>
         /// 获取模块的名称
@@ -14,7 +16,7 @@ namespace Uania.Tools.Infrastructure
         /// <returns></returns>
         public override string GetName()
         {
-            return this.GetType().FullName ?? "Uania.Tools.Infrastructure.InfrstructureModule";
+            return this.GetType().FullName ?? "Uania.Tools.Services.ServicesModule";
         }
 
         /// <summary>
@@ -25,7 +27,12 @@ namespace Uania.Tools.Infrastructure
         /// <returns></returns>
         public override void RegisterService(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IRijndaelService, RijndaelServiceImpl>(sp => new RijndaelServiceImpl(configuration["RijndaelConfig:Key"]));
+            using IModule module = new InfrstructureModule();
+            module.RegisterService(services, configuration);
+            using IModule repositoryModule = new RepositoryModule();
+            repositoryModule.RegisterService(services, configuration);
+
+            services.AddScoped<IUserGroupServices, UserGroupServicesImpl>();
         }
 
         /// <summary>

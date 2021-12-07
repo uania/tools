@@ -1,12 +1,13 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Uania.Tools.Infrastructure.Rijndael;
-using Uania.Tools.Infrastructure.Rijndael.Impl;
 using Uania.Tools.Infrastructure.Module;
+using Uania.Tools.Repository.Repositories;
+using Uania.Tools.Repository.DataBase.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace Uania.Tools.Infrastructure
+namespace Uania.Tools.Repository
 {
-    public class InfrstructureModule : ModuleBase, IModule
+    public class RepositoryModule : ModuleBase, IModule
     {
         /// <summary>
         /// 获取模块的名称
@@ -14,7 +15,7 @@ namespace Uania.Tools.Infrastructure
         /// <returns></returns>
         public override string GetName()
         {
-            return this.GetType().FullName ?? "Uania.Tools.Infrastructure.InfrstructureModule";
+            return this.GetType().FullName ?? "Uania.Tools.Repository.RepositoryModule";
         }
 
         /// <summary>
@@ -25,7 +26,11 @@ namespace Uania.Tools.Infrastructure
         /// <returns></returns>
         public override void RegisterService(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IRijndaelService, RijndaelServiceImpl>(sp => new RijndaelServiceImpl(configuration["RijndaelConfig:Key"]));
+            services.AddScoped<IUserGroupRepository, UserGroupRepository>();
+            services.AddDbContext<BaseDbContext>(opt =>
+            {
+                opt.UseSqlServer(configuration["ConnectionStrings:SqlServerConnection"]);
+            });
         }
 
         /// <summary>
