@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using Microsoft.Extensions.Options;
 
 namespace Uania.Tools.Infrastructure.Rijndael.Impl
 {
@@ -9,11 +10,19 @@ namespace Uania.Tools.Infrastructure.Rijndael.Impl
         /// </summary>
         private readonly byte[] _key;
 
-        public RijndaelServiceImpl(string key)
+        private readonly Configs.RijndaelConfig _rijndaelConfig;
+
+        public RijndaelServiceImpl(IOptions<Configs.RijndaelConfig>? options)
         {
-            if (key == null || key.Length <= 0)
+            if (options == null)
+            {
                 throw new ArgumentNullException("key");
-            _key = Convert.FromBase64String(key);
+            }
+            _rijndaelConfig = options.Value;
+
+            if (_rijndaelConfig.Key == null || _rijndaelConfig.Key.Length <= 0)
+                throw new ArgumentNullException("key");
+            _key = Convert.FromBase64String(_rijndaelConfig.Key);
         }
 
         /// <summary>

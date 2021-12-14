@@ -5,6 +5,9 @@ using Uania.Tools.Infrastructure.Rijndael.Impl;
 using Uania.Tools.Infrastructure.Module;
 using Uania.Tools.Infrastructure.RegValidator;
 using Uania.Tools.Infrastructure.RegValidator.Impl;
+using Uania.Tools.Infrastructure.FileUpdate;
+using Uania.Tools.Infrastructure.FileUpdate.Impl;
+using Microsoft.Extensions.Options;
 
 namespace Uania.Tools.Infrastructure
 {
@@ -27,8 +30,9 @@ namespace Uania.Tools.Infrastructure
         /// <returns></returns>
         public override void RegisterService(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IRijndaelService, RijndaelServiceImpl>(sp => new RijndaelServiceImpl(configuration["RijndaelConfig:Key"]));
+            services.AddSingleton<IRijndaelService, RijndaelServiceImpl>(sp => new RijndaelServiceImpl(sp.GetService<IOptions<Configs.RijndaelConfig>>()));
             services.AddSingleton<IRegValidatorServices, RegValidatorServicesImpl>();
+            services.AddSingleton<IFileUpdateServices, FileUpdateAwsServicesImpl>(sp => new FileUpdateAwsServicesImpl(sp.GetService<IOptions<Configs.AmazonS3Config>>()));
         }
 
         /// <summary>
