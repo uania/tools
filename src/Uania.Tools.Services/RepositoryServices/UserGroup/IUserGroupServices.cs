@@ -27,5 +27,11 @@ namespace Uania.Tools.Services.RepositoryServices.UserGroup
         /// </summary>
         /// <returns></returns>
         public Task<string> DetryptData();
+
+        /// <summary>
+        /// 使用aws存储替换本地文件
+        /// </summary>
+        /// <returns></returns>
+        public Task<string> ReplaceFileUrlWithAws();
     }
 }

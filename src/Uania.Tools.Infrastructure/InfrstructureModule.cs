@@ -8,6 +8,8 @@ using Uania.Tools.Infrastructure.RegValidator.Impl;
 using Uania.Tools.Infrastructure.FileUpdate;
 using Uania.Tools.Infrastructure.FileUpdate.Impl;
 using Microsoft.Extensions.Options;
+using Uania.Tools.Infrastructure.HttpServices;
+using Uania.Tools.Infrastructure.HttpServices.Impl;
 
 namespace Uania.Tools.Infrastructure
 {
@@ -33,6 +35,7 @@ namespace Uania.Tools.Infrastructure
             services.AddSingleton<IRijndaelService, RijndaelServiceImpl>(sp => new RijndaelServiceImpl(sp.GetService<IOptions<Configs.RijndaelConfig>>()));
             services.AddSingleton<IRegValidatorServices, RegValidatorServicesImpl>();
             services.AddSingleton<IFileUpdateServices, FileUpdateAwsServicesImpl>(sp => new FileUpdateAwsServicesImpl(sp.GetService<IOptions<Configs.AmazonS3Config>>()));
+            services.AddSingleton<IHttpServices, HttpServicesImpl>();
         }
 
         /// <summary>

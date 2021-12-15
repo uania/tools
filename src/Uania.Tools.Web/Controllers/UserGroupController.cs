@@ -82,5 +82,21 @@ namespace Uania.Tools.Web.Controllers
             };
             return res;
         }
+
+        /// <summary>
+        /// 使用aws存储替换本地存储
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ResponseBase<string>> ReplaceFileUrlWithAws()
+        {
+            var awsUrl = await _userGroupServices.ReplaceFileUrlWithAws();
+            return new ResponseBase<string>
+            {
+                Code = ResponseCodeEnum.Success,
+                Message = "请求成功",
+                Data = awsUrl
+            };
+        }
     }
 }

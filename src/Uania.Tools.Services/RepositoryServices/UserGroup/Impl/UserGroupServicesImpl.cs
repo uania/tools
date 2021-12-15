@@ -2,6 +2,8 @@ using Uania.Tools.Models.UserGroup;
 using Uania.Tools.Repository.Repositories;
 using Uania.Tools.Infrastructure.RegValidator;
 using Uania.Tools.Infrastructure.Rijndael;
+using Uania.Tools.Infrastructure.FileUpdate;
+using Uania.Tools.Infrastructure.HttpServices;
 
 namespace Uania.Tools.Services.RepositoryServices.UserGroup.Impl
 {
@@ -14,15 +16,27 @@ namespace Uania.Tools.Services.RepositoryServices.UserGroup.Impl
 
         private readonly IRijndaelService _rijndaelService;
 
+        private readonly IUserGroupActivityRepository _userGroupActivityRepository;
+
+        private readonly IFileUpdateServices _fileUpdateServices;
+
+        private readonly IHttpServices _httpServices;
+
         public UserGroupServicesImpl(IUserGroupUsersRepository userGroupUsersRepository
                                     , IUserGroupApplyRepository userGroupApplyRepository
                                     , IRegValidatorServices regValidatorServices
-                                    , IRijndaelService rijndaelService)
+                                    , IRijndaelService rijndaelService
+                                    , IUserGroupActivityRepository userGroupActivityRepository
+                                    , IFileUpdateServices fileUpdateServices
+                                    , IHttpServices httpServices)
         {
             _userGroupUsersRepository = userGroupUsersRepository;
             _userGroupApplyRepository = userGroupApplyRepository;
             _regValidatorServices = regValidatorServices;
             _rijndaelService = rijndaelService;
+            _userGroupActivityRepository = userGroupActivityRepository;
+            _fileUpdateServices = fileUpdateServices;
+            _httpServices = httpServices;
         }
 
         /// <summary>
@@ -179,6 +193,45 @@ namespace Uania.Tools.Services.RepositoryServices.UserGroup.Impl
             }
 
             return $"users表解密{userAffected}行；apply表解密{applyAffected}行；";
+        }
+
+        /// <summary>
+        /// 使用aws存储替换本地文件
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string> ReplaceFileUrlWithAws()
+        {
+            //获取活动数据
+            var id = Guid.Parse("3CB4DE30-FAE7-4782-8CDE-281A842D1D1B");
+            var activities = await _userGroupActivityRepository.GetListAsync(r => r.Id == id);
+
+            Func<string, Task<string>> action = async (originalUrl) =>
+             {
+                 var awsUrl = string.Empty;
+                 if (!string.IsNullOrWhiteSpace(originalUrl))
+                 {
+                     try
+                     {
+                         var originalFile = await _httpServices.DownloadFile(originalUrl);
+                         var fileName = Path.GetFileName(originalUrl);
+                         awsUrl = await _fileUpdateServices.PutAsync(originalFile, "tool-test/", fileName);
+                     }
+                     catch (Exception ex)
+                     {
+                         Console.WriteLine(ex.Message);
+                     }
+                 }
+                 return awsUrl;
+             };
+
+            //循环替换数据url
+            foreach (var activity in activities)
+            {
+                var awsUrl = await action.Invoke(activity.BannerList);
+                if (!string.IsNullOrEmpty(awsUrl))
+                    activity.BannerList = awsUrl;
+            }
+            return activities?.FirstOrDefault()?.BannerList ?? string.Empty;
         }
     }
 }

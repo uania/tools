@@ -26,7 +26,7 @@ namespace Uania.Tools.Infrastructure.FileUpdate.Impl
                 throw new ArgumentNullException("缺少AWS存储所需配置，请检查配置");
             }
 
-            var tmpBucketRegion = typeof(RegionEndpoint).GetField(_awsConfigs.BucketName)?.GetValue(null);
+            var tmpBucketRegion = typeof(RegionEndpoint).GetField(_awsConfigs.AwsEndPoint)?.GetValue(null);
             if (tmpBucketRegion == null)
             {
                 throw new ArgumentNullException("AWS存储所需配置AmazonS3Config.BucketName不在范围内，请检查配置");
@@ -125,7 +125,7 @@ namespace Uania.Tools.Infrastructure.FileUpdate.Impl
 
             if (response.HttpStatusCode == HttpStatusCode.OK)
             {
-                return $"{folderPath ?? string.Empty}{fileName}";
+                return $"{_awsConfigs?.FilePerfix ?? string.Empty}{folderPath ?? string.Empty}{fileName}";
             }
 
             return "";
