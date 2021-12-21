@@ -28,9 +28,8 @@ namespace Uania.Tools.Repository
         {
             services.AddDbContext<BaseDbContext>(opt =>
             {
-                opt.UseSqlServer(configuration["ConnectionStrings:SqlServerConnection"]);
+                opt.UseSqlServer(configuration.GetConnectionString("SqlServerConnection"));
             });
-            
             services.AddScoped<IUserGroupUsersRepository, UserGroupUsersRepository>();
             services.AddScoped<IUserGroupApplyRepository, UserGroupApplyRepository>();
             services.AddScoped<IUserGroupActivityRepository, UserGroupActivityRepository>();
