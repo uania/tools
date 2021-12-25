@@ -20,6 +20,8 @@ namespace Uania.Tools.Web
             services.Configure<ConnectionConfig>(configuration.GetSection(ConnectionConfig.SectionName));
             //注入存储配置
             services.Configure<AmazonS3Config>(configuration.GetSection(AmazonS3Config.SectionName));
+            //注入jwt配置
+            services.Configure<JwtConfig>(configuration.GetSection(JwtConfig.SectionName));
 
             //调用依赖的服务注入模块
             using var module = new InfrstructureModule();

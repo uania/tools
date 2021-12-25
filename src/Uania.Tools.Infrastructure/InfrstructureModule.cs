@@ -10,6 +10,8 @@ using Uania.Tools.Infrastructure.FileUpdate.Impl;
 using Microsoft.Extensions.Options;
 using Uania.Tools.Infrastructure.HttpServices;
 using Uania.Tools.Infrastructure.HttpServices.Impl;
+using Uania.Tools.Infrastructure.JwtServices;
+using Uania.Tools.Infrastructure.JwtServices.Impl;
 
 namespace Uania.Tools.Infrastructure
 {
@@ -36,6 +38,7 @@ namespace Uania.Tools.Infrastructure
             services.AddSingleton<IRegValidatorServices, RegValidatorServicesImpl>();
             services.AddSingleton<IFileUpdateServices, FileUpdateAwsServicesImpl>(sp => new FileUpdateAwsServicesImpl(sp.GetService<IOptions<Configs.AmazonS3Config>>()));
             services.AddSingleton<IHttpServices, HttpServicesImpl>();
+            services.AddSingleton<IJwtServices,JwtServicesImpl>();
         }
 
         /// <summary>

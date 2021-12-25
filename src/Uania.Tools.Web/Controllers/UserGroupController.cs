@@ -5,9 +5,8 @@ using Uania.Tools.Web.Models.Response;
 
 namespace Uania.Tools.Web.Controllers
 {
-    [ApiController]
     [Route("api/[controller]/[action]")]
-    public class UserGroupController
+    public class UserGroupController : UaniaBaseController
     {
         private IUserGroupServices _userGroupServices;
         public UserGroupController(IUserGroupServices userGroupServices)

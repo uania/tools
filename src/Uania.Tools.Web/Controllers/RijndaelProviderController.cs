@@ -1,11 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Uania.Tools.Infrastructure.Rijndael;
 
 namespace Uania.Tools.Web.Controllers
 {
-    [ApiController]
+    [AllowAnonymous]
     [Route("api/[controller]/[action]")]
-    public class RijndaelProviderController : ControllerBase
+    public class RijndaelProviderController : UaniaBaseController
     {
         private readonly IRijndaelService _rijndaelService;
         public RijndaelProviderController(IRijndaelService rijndaelService)
