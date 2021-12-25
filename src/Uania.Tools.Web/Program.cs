@@ -7,6 +7,9 @@ using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add log4net
+builder.Logging.ClearProviders();
+builder.Logging.AddLog4Net();
 // Add services to the container.
 builder.Services.RegisterService(builder.Configuration);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
