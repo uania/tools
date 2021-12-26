@@ -5,10 +5,10 @@ using System.Data;
 
 namespace Uania.Tools.Repository.DataBase.DbContexts
 {
-    public class UaniaSideDapperDbContext
+    public class SportsTestingDapperDbContext
     {
         private readonly ConnectionConfig _connectionConfig;
-        public UaniaSideDapperDbContext(IOptions<ConnectionConfig>? options)
+        public SportsTestingDapperDbContext(IOptions<ConnectionConfig>? options)
         {
             if (options == null)
             {

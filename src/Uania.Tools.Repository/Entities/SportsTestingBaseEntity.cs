@@ -2,7 +2,7 @@ using Uania.Tools.Repository.DataBase.Models;
 
 namespace Uania.Tools.Repository.Entities
 {
-    public class SideBaseEntity : IEntity<int>
+    public class SportsTestingBaseEntity : IEntity<int>
     {
         /// <summary>
         /// 主键

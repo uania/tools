@@ -30,11 +30,11 @@ namespace Uania.Tools.Repository
             {
                 opt.UseSqlServer(configuration.GetConnectionString("SqlServerConnection"));
             });
-            services.AddDbContext<SideDbContext>(opt =>
+            services.AddDbContext<SportsTestingDbContext>(opt =>
             {
                 opt.UseNpgsql(configuration.GetConnectionString("PostgresqlConnection"));
             });
-            services.AddSingleton<UaniaSideDapperDbContext>();
+            services.AddSingleton<SportsTestingDapperDbContext>();
             services.AddScoped<IUserGroupUsersRepository, UserGroupUsersRepository>();
             services.AddScoped<IUserGroupApplyRepository, UserGroupApplyRepository>();
             services.AddScoped<IUserGroupActivityRepository, UserGroupActivityRepository>();

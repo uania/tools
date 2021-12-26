@@ -1,6 +1,6 @@
 namespace Uania.Tools.Repository.Entities
 {
-    public class SideUser : SideBaseEntity
+    public class SportsTestingUser : SportsTestingBaseEntity
     {
         public string? UserName { get; set; }
 

@@ -5,15 +5,15 @@ using Uania.Tools.Repository.DataBase.Models;
 
 namespace Uania.Tools.Repository.DataBase.DbContexts
 {
-    public class SideRepositoryBase
+    public class SportsTestingRepositoryBase
     {
 
     }
 
-    public abstract class SideRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey> where TPrimaryKey : struct
+    public abstract class SportsTestingRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey> where TPrimaryKey : struct
     {
-        private SideDbContext _dbContext;
-        public SideRepositoryBase(SideDbContext dbContext)
+        private SportsTestingDbContext _dbContext;
+        public SportsTestingRepositoryBase(SportsTestingDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -50,10 +50,9 @@ namespace Uania.Tools.Repository.DataBase.DbContexts
             Table.Attach(entity);
         }
     }
-
-    public abstract class SideRepositoryBase<TEntity> : SideRepositoryBase<TEntity, int> where TEntity : class, IEntity<int>
+    public abstract class SportsTestingRepositoryBase<TEntity> : SportsTestingRepositoryBase<TEntity, int> where TEntity : class, IEntity<int>
     {
-        public SideRepositoryBase(SideDbContext dbContext) : base(dbContext)
+        public SportsTestingRepositoryBase(SportsTestingDbContext dbContext) : base(dbContext)
         {
 
         }
