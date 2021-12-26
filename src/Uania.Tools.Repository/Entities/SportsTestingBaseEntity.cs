@@ -1,4 +1,5 @@
 using Uania.Tools.Repository.DataBase.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Uania.Tools.Repository.Entities
 {
@@ -8,6 +9,7 @@ namespace Uania.Tools.Repository.Entities
         /// 主键
         /// </summary>
         /// <value></value>
+        [Column("id")]
         public int Id { get; set; }
     }
 }

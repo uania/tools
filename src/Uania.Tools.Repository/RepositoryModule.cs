@@ -38,6 +38,7 @@ namespace Uania.Tools.Repository
             services.AddScoped<IUserGroupUsersRepository, UserGroupUsersRepository>();
             services.AddScoped<IUserGroupApplyRepository, UserGroupApplyRepository>();
             services.AddScoped<IUserGroupActivityRepository, UserGroupActivityRepository>();
+            services.AddScoped<ISportsTestingUsersRepository, SportsTestingUsersRepository>();
         }
 
         /// <summary>

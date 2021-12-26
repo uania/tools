@@ -23,6 +23,13 @@ namespace Uania.Tools.Repository.DataBase.Models
         /// <param name="entities"></param>
         /// <returns></returns>
         Task<int> Update(List<TEntity> entities);
+
+        /// <summary>
+        /// 获取详情
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        Task<TEntity?> GetInfo(Expression<Func<TEntity, bool>> predicate);
     }
 
     public interface IRepository<TEntity> : IRepository<TEntity, Guid>, IRepository where TEntity : class, IEntity<Guid>

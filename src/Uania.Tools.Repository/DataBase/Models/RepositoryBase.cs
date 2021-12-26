@@ -38,6 +38,16 @@ namespace Uania.Tools.Repository.DataBase.Models
             return await _dbContext.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// 获取详情
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual Task<TEntity?> GetInfo(Expression<Func<TEntity, bool>> predicate)
+        {
+            return Table.FirstOrDefaultAsync(predicate);
+        }
+
         protected virtual void AttachIfNot(TEntity entity)
         {
             var entry = _dbContext.ChangeTracker.Entries().FirstOrDefault(ent => ent.Entity == entity);

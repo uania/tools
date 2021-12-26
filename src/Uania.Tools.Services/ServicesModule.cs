@@ -5,6 +5,8 @@ using Uania.Tools.Infrastructure.Module;
 using Uania.Tools.Repository;
 using Uania.Tools.Services.RepositoryServices.UserGroup;
 using Uania.Tools.Services.RepositoryServices.UserGroup.Impl;
+using Uania.Tools.Services.RepositoryServices.SportsTestingAccount;
+using Uania.Tools.Services.RepositoryServices.SportsTestingAccount.Impl;
 
 namespace Uania.Tools.Services
 {
@@ -33,6 +35,7 @@ namespace Uania.Tools.Services
             repositoryModule.RegisterService(services, configuration);
 
             services.AddScoped<IUserGroupServices, UserGroupServicesImpl>();
+            services.AddScoped<ISportsTestingAccountServices, STAccountServiceImpl>();
         }
 
         /// <summary>
