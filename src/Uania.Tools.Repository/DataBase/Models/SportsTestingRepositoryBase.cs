@@ -1,9 +1,9 @@
 using System.Linq.Expressions;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
-using Uania.Tools.Repository.DataBase.Models;
+using Uania.Tools.Repository.DataBase.DbContexts;
 
-namespace Uania.Tools.Repository.DataBase.DbContexts
+namespace Uania.Tools.Repository.DataBase.Models
 {
     public class SportsTestingRepositoryBase
     {

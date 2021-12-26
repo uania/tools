@@ -4,7 +4,7 @@ using Uania.Tools.Repository.Entities;
 
 namespace Uania.Tools.Repository.Repositories
 {
-    public class UserGroupActivityRepository : Repository<UserGroupActivity>, IUserGroupActivityRepository
+    public class UserGroupActivityRepository : RepositoryBase<UserGroupActivity>, IUserGroupActivityRepository
     {
         public UserGroupActivityRepository(BaseDbContext dbContext) : base(dbContext)
         {

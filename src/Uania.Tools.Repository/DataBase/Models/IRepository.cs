@@ -29,4 +29,9 @@ namespace Uania.Tools.Repository.DataBase.Models
     {
 
     }
+
+    public interface ISportsTestingRepository<TEntity> : IRepository<TEntity, int>, IRepository where TEntity : class, IEntity<int>
+    {
+
+    }
 }

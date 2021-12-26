@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Uania.Tools.Repository.DataBase.Models
 {
-    public class Repository
+    public class RepositoryBase
     {
 
     }
@@ -50,9 +50,9 @@ namespace Uania.Tools.Repository.DataBase.Models
         }
     }
 
-    public abstract class Repository<TEntity> : RepositoryBase<TEntity, Guid>, IRepository<TEntity> where TEntity : class, IEntity<Guid>
+    public abstract class RepositoryBase<TEntity> : RepositoryBase<TEntity, Guid>, IRepository<TEntity> where TEntity : class, IEntity<Guid>
     {
-        public Repository(BaseDbContext dbContext) : base(dbContext)
+        public RepositoryBase(BaseDbContext dbContext) : base(dbContext)
         {
 
         }
