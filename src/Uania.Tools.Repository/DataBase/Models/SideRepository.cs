@@ -11,8 +11,8 @@ namespace Uania.Tools.Repository.DataBase.DbContexts
 
     public abstract class SideRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey> where TPrimaryKey : struct
     {
-        private UaniaSideDbContext _dbContext;
-        public SideRepositoryBase(UaniaSideDbContext dbContext)
+        private UaniaSideDapperDbContext _dbContext;
+        public SideRepositoryBase(UaniaSideDapperDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -50,7 +50,7 @@ namespace Uania.Tools.Repository.DataBase.DbContexts
 
     public abstract class SideRepositoryBase<TEntity> : SideRepositoryBase<TEntity, int> where TEntity : class, IEntity<int>
     {
-        public SideRepositoryBase(UaniaSideDbContext dbContext) : base(dbContext)
+        public SideRepositoryBase(UaniaSideDapperDbContext dbContext) : base(dbContext)
         {
 
         }

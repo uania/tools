@@ -3,12 +3,12 @@ using Microsoft.Extensions.Options;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
-namespace Uania.Tools.Repository.DataBase.Models
+namespace Uania.Tools.Repository.DataBase.DbContexts
 {
-    public class UaniaSideDbContext
+    public class UaniaSideDapperDbContext
     {
         private readonly ConnectionConfig _connectionConfig;
-        public UaniaSideDbContext(IOptions<ConnectionConfig>? options)
+        public UaniaSideDapperDbContext(IOptions<ConnectionConfig>? options)
         {
             if (options == null)
             {

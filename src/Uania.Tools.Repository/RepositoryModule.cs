@@ -2,7 +2,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Uania.Tools.Infrastructure.Module;
 using Uania.Tools.Repository.Repositories;
-using Uania.Tools.Repository.DataBase.Models;
 using Uania.Tools.Repository.DataBase.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +30,11 @@ namespace Uania.Tools.Repository
             {
                 opt.UseSqlServer(configuration.GetConnectionString("SqlServerConnection"));
             });
-            services.AddSingleton<UaniaSideDbContext>();
+            services.AddDbContext<SideDbContext>(opt =>
+            {
+                opt.UseNpgsql(configuration.GetConnectionString("PostgresqlConnection"));
+            });
+            services.AddSingleton<UaniaSideDapperDbContext>();
             services.AddScoped<IUserGroupUsersRepository, UserGroupUsersRepository>();
             services.AddScoped<IUserGroupApplyRepository, UserGroupApplyRepository>();
             services.AddScoped<IUserGroupActivityRepository, UserGroupActivityRepository>();
