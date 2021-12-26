@@ -1,7 +1,7 @@
 using Uania.Tools.Repository.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Uania.Tools.Repository.DataBase.Models
+namespace Uania.Tools.Repository.DataBase.DbContexts
 {
     public class BaseDbContext : DbContext
     {

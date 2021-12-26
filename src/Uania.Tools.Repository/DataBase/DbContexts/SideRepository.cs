@@ -1,13 +1,8 @@
 using System.Linq.Expressions;
 using Dapper;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
+using Uania.Tools.Repository.DataBase.Models;
 
-namespace Uania.Tools.Repository.DataBase.Models
+namespace Uania.Tools.Repository.DataBase.DbContexts
 {
     public class SideRepository
     {
@@ -55,7 +50,7 @@ namespace Uania.Tools.Repository.DataBase.Models
 
     public abstract class SideRepositoryBase<TEntity> : SideRepositoryBase<TEntity, int> where TEntity : class, IEntity<int>
     {
-        public SideRepositoryBase(BaseDbContext dbContext) : base(dbContext)
+        public SideRepositoryBase(UaniaSideDbContext dbContext) : base(dbContext)
         {
 
         }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Uania.Tools.Infrastructure.Module;
 using Uania.Tools.Repository.Repositories;
 using Uania.Tools.Repository.DataBase.Models;
+using Uania.Tools.Repository.DataBase.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Uania.Tools.Repository
