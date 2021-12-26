@@ -30,9 +30,10 @@ namespace Uania.Tools.Repository
             {
                 opt.UseSqlServer(configuration.GetConnectionString("SqlServerConnection"));
             });
-            services.AddScoped<IUserGroupUsersRepository, UserGroupUsersRepository>();
-            services.AddScoped<IUserGroupApplyRepository, UserGroupApplyRepository>();
-            services.AddScoped<IUserGroupActivityRepository, UserGroupActivityRepository>();
+            services.AddSingleton<UaniaSideDbContext>();
+            services.AddSingleton<IUserGroupUsersRepository, UserGroupUsersRepository>();
+            services.AddSingleton<IUserGroupApplyRepository, UserGroupApplyRepository>();
+            services.AddSingleton<IUserGroupActivityRepository, UserGroupActivityRepository>();
         }
 
         /// <summary>
