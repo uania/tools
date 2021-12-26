@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Uania.Tools.Repository.Entities;
 
 namespace Uania.Tools.Repository.DataBase.DbContexts
 {
@@ -8,5 +9,7 @@ namespace Uania.Tools.Repository.DataBase.DbContexts
         {
 
         }
+
+        public DbSet<SideUser>? SideUser { get; set; }
     }
 }
