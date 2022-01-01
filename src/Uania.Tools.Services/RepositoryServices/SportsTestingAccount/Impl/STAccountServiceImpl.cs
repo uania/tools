@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using AutoMapper;
 using Uania.Tools.Models.SportsTesting;
 using Uania.Tools.Repository.Repositories;
 
@@ -7,9 +8,12 @@ namespace Uania.Tools.Services.RepositoryServices.SportsTestingAccount.Impl
     public class STAccountServiceImpl : ISportsTestingAccountServices
     {
         private readonly ISportsTestingUsersRepository _stAccountRepo;
-        public STAccountServiceImpl(ISportsTestingUsersRepository stAccountRepo)
+        private readonly IMapper _mapper;
+        public STAccountServiceImpl(ISportsTestingUsersRepository stAccountRepo
+        , IMapper mapper)
         {
             _stAccountRepo = stAccountRepo;
+            _mapper = mapper;
         }
 
         public async Task<SportsTestingUsers?> GetUserInfo(string phone)
@@ -18,17 +22,7 @@ namespace Uania.Tools.Services.RepositoryServices.SportsTestingAccount.Impl
             SportsTestingUsers res = null;
             if (entity != null)
             {
-                res = new SportsTestingUsers
-                {
-                    Id = entity.Id,
-                    UserName = entity.UserName,
-                    UserEmail = entity.UserEmail,
-                    UserPhone = entity.UserPhone,
-                    UserRole = entity.UserRole,
-                    UserState = entity.UserState,
-                    CreateTime = entity.CreateTime,
-                    LastUpdateTime = entity.LastUpdateTime
-                };
+                res = _mapper.Map<SportsTestingUsers>(entity);
             }
 
             return res;

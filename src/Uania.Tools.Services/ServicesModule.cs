@@ -29,6 +29,8 @@ namespace Uania.Tools.Services
         /// <returns></returns>
         public override void RegisterService(IServiceCollection services, IConfiguration configuration)
         {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             using IModule module = new InfrstructureModule();
             module.RegisterService(services, configuration);
             using IModule repositoryModule = new RepositoryModule();
