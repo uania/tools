@@ -1,0 +1,15 @@
+<#@ template language="C#" debug="True" hostSpecific="True" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="Npgsql"#>
+<#@ include file="$(LinqToDBT4PostgreSQLTemplatesDirectory)LinqToDB.PostgreSQL.Tools.ttinclude" #>
+<#@ include file="$(LinqToDBT4PostgreSQLTemplatesDirectory)PluralizationService.ttinclude" #>
+<#
+	//
+	var connstring = "Server=42.192.81.162;Port=5432;Database=sports_testing;User Id=postgres;Password=123456;Timeout=30;Pooling=true;MaxPoolSize=100;";
+	using var conn = await OpenConnectionAsync();
+    using var command = new NpgsqlCommand("SELECT 1", conn);
+    var da = new NpgsqlDataAdapter();
+    da.SelectCommand = command;
+    var ds = new DataSet();
+    da.Fill(ds);
+#>

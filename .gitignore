@@ -8,3 +8,10 @@ src/Uania.Tools.Services/obj/*
 src/Uania.Tools.Services/bin/*
 src/Uania.Tools.Repository/bin/*
 src/Uania.Tools.Repository/obj/*
+src/Uania.Tools.T4/bin/*
+src/Uania.Tools.T4/obj/*
+src/Uania.Tools.Test/bin/*
+src/Uania.Tools.Test/obj/*
+src/Uania.Tools.TestConsole/bin/*
+src/Uania.Tools.TestConsole/obj/*
+src/.vs/SportsTesting/xs/UserPrefs.xml
