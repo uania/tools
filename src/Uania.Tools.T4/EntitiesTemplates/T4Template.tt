@@ -1,7 +1,7 @@
 <#@ template language="C#" debug="True" hostSpecific="True" #>
 <#@ output extension=".cs" #>
-<#@ assembly name="System.Data" #>
-<#@ import namespace="Npgsql"#>
+<#@ assembly name="$(SolutionDir)/.xml" #>
+<#@ import namespace="Npgsql" #>
 <#
     var ns = "Uania.Tools.Repository.Entities";
     var baseEntity = "SportsTestingBaseEntity";
@@ -15,7 +15,7 @@
     da.Fill(ds);
     
     foreach(DataTable dt in ds.Tables)
-    {
-
-     }
+    {#>
+<#= "123"#>>
+     <#}
 #>
