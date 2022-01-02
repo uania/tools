@@ -1,33 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using Uania.Tools.T4Sample;
-using Uania.Tools.T4Sample.EntitiesT4;
+﻿using System.Data;
+using Npgsql;
 
-// DB Type => .NET Type
-var typeDef = new Dictionary<string, string>()
-            {
-                { "integer", "int" },
-                { "varchar", "string" },
-                { "date", "DateTime" },
-            };
-
-// Mock Table Data
-var table = new TableInfo()
+try
 {
-    Name = "staff_master",
-    Description = "Stores employee information.",
-    Columns = new[]
+    var connString = "Server=42.192.81.162;Port=5432;Database=sports_testing;User Id=postgres;Password=123456;Timeout=30;Pooling=true;MaxPoolSize=100;";
+    using var conn = new NpgsqlConnection(connString);
+    conn.Open();
+    using var command = new NpgsqlCommand("SELECT table_catalog,table_schema,table_name FROM INFORMATION_SCHEMA.TABLES where table_catalog = 'sports_testing' and table_schema = 'public';", conn);
+    var da = new NpgsqlDataAdapter();
+    da.SelectCommand = command;
+    var ds = new DataSet();
+    da.Fill(ds);
+    var dt = ds.Tables[0];
+    foreach (DataRow dr in dt.Rows)
     {
-                    new ColumnInfo() { Name = "staff_id", Type = "integer", IsPrimary = true, NotNull = true },
-                    new ColumnInfo() { Name = "staff_name", Type = "varchar", NotNull = true },
-                    new ColumnInfo() { Name = "address", Type = "varchar", Description = "Home Address." },
-                    new ColumnInfo() { Name = "created_date", Type = "date" },
-                }
-};
-
-// This variable type should be an interface because avoid CS1061 compile error.
-// At runtime, the implementation's TransformText() is called.
-ITextTemplate template = new demo(typeDef, "MyNameSpace", table);
-
-// Actually, you can output to a file like "StaffMaster.cs".
-Console.WriteLine(template.TransformText());
+        System.Console.WriteLine(dr[0]);
+        System.Console.WriteLine(dr[1]);
+        System.Console.WriteLine(dr[2]);
+    }
+}
+catch (System.Exception ex)
+{
+    System.Console.WriteLine(ex.Message);
+}

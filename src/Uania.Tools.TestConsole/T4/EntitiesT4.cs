@@ -10,8 +10,8 @@ namespace Uania.Tools.TestConsole.T4
             try
             {
                 var connString = "Server=42.192.81.162;Port=5432;Database=sports_testing;User Id=postgres;Password=123456;Timeout=30;Pooling=true;MaxPoolSize=100;";
-                await using var conn = new NpgsqlConnection(connString);
-                await conn.OpenAsync();
+                using var conn = new NpgsqlConnection(connString);
+                conn.Open();
                 using var command = new NpgsqlCommand("SELECT table_catalog,table_schema,table_name FROM INFORMATION_SCHEMA.TABLES where table_catalog = 'sports_testing' and table_schema = 'public';", conn);
                 var da = new NpgsqlDataAdapter();
                 da.SelectCommand = command;
