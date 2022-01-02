@@ -1,15 +1,21 @@
 <#@ template language="C#" debug="True" hostSpecific="True" #>
 <#@ output extension=".cs" #>
+<#@ assembly name="System.Data" #>
 <#@ import namespace="Npgsql"#>
-<#@ include file="$(LinqToDBT4PostgreSQLTemplatesDirectory)LinqToDB.PostgreSQL.Tools.ttinclude" #>
-<#@ include file="$(LinqToDBT4PostgreSQLTemplatesDirectory)PluralizationService.ttinclude" #>
 <#
-	//
-	var connstring = "Server=42.192.81.162;Port=5432;Database=sports_testing;User Id=postgres;Password=123456;Timeout=30;Pooling=true;MaxPoolSize=100;";
-	using var conn = await OpenConnectionAsync();
-    using var command = new NpgsqlCommand("SELECT 1", conn);
+    var ns = "Uania.Tools.Repository.Entities";
+    var baseEntity = "SportsTestingBaseEntity";
+
+	var connString = "Server=42.192.81.162;Port=5432;Database=sports_testing;User Id=postgres;Password=123456;Timeout=30;Pooling=true;MaxPoolSize=100;";
+    Task.Run(() => conn.OpenAsync().Wait());
+    var command = new NpgsqlCommand("SELECT table_catalog,table_schema,table_name FROM INFORMATION_SCHEMA.TABLES where table_catalog = 'sports_testing' and table_schema = 'public';", conn);
     var da = new NpgsqlDataAdapter();
     da.SelectCommand = command;
     var ds = new DataSet();
     da.Fill(ds);
+    
+    foreach(DataTable dt in ds.Tables)
+    {
+
+     }
 #>
