@@ -1,13 +1,10 @@
 ﻿<#@ template language="C#" debug="true" hostspecific="true" #>
-<#@ assembly name="System.Core" #>
 <#@ assembly name="$(ProjectDir)/bin/Debug/Npgsql.dll" #>
 <#@ assembly name="$(SolutionDir)/packages/NETStandard.Library.2.0.3/build/netstandard2.0/ref/netstandard" #>
-<#@ import namespace="System.Collections.Generic" #>
+<#@ assembly name="$(ProjectDir)/bin/Debug/Uania.Tools.T4.exe" #>
 <#@ import namespace="Npgsql" #>
-<#@ import namespace="System" #>
-<#@ import namespace="System.Linq" #>
-<#@ import namespace="System.Text" #>
 <#@ import namespace="System.Data" #>
+<#@ import namespace="Uania.Tools.T4.Common" #>
 <#
     string ns = "Uania.Tools.Repository.Entities";
     string baseEntity = "SportsTestingBaseEntity";
@@ -61,6 +58,9 @@ namespace <#= ns #>
     }
 }      
 <#
+    string basePath = Host.ResolveAssemblyReference("$(TargetDir)"); 
+    // TODO: 解决Ubuntu文件写入权限问题
+    SaveOutput("/home/yifan","Automaticlly",TurnName(dr[2].ToString()));
     }
 #>
 
@@ -98,5 +98,11 @@ namespace <#= ns #>
             default:
                 return "string";
         }
+    }
+    
+    void SaveOutput(string baseFolder,string destinationFolder,string outputFileName)
+    {
+        var file = new SaveFile();
+        file.Save(baseFolder,destinationFolder,outputFileName,this.GenerationEnvironment.ToString());
     }
 #>

@@ -6,6 +6,8 @@ namespace Uania.Tools.T4
     {
         public static void Main(string[] args)
         {
+            var fileHelp = new Common.SaveFile();
+            fileHelp.Save(@"/home/yifan/abc.cs", "sfdfdgdf");
             Console.WriteLine("Hello World!");
         }
     }
