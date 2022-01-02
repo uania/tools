@@ -1,17 +1,11 @@
 ﻿using System.Data;
 using Npgsql;
+using Uania.Tools.T4Sample.Common;
 
 try
 {
-    var connString = "Server=42.192.81.162;Port=5432;Database=sports_testing;User Id=postgres;Password=123456;Timeout=30;Pooling=true;MaxPoolSize=100;";
-    using var conn = new NpgsqlConnection(connString);
-    conn.Open();
-    using var command = new NpgsqlCommand("SELECT table_catalog,table_schema,table_name FROM INFORMATION_SCHEMA.TABLES where table_catalog = 'sports_testing' and table_schema = 'public';", conn);
-    var da = new NpgsqlDataAdapter();
-    da.SelectCommand = command;
-    var ds = new DataSet();
-    da.Fill(ds);
-    var dt = ds.Tables[0];
+    IDatabase abc = new Portgres();
+    var dt = abc.GetDataTableInfo("sports_testing_users");
     foreach (DataRow dr in dt.Rows)
     {
         System.Console.WriteLine(dr[0]);

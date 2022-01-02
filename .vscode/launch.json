@@ -16,7 +16,7 @@
             "console": "internalConsole"
         },
         {
-            "name": ".NET Core Launch (console)",
+            "name": ".NET Core Launch (TestConsole)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",

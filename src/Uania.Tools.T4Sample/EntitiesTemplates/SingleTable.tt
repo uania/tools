@@ -1,14 +1,11 @@
 <#@ template language="C#" debug="false" hostSpecific="True" #>
 <#@ output extension=".cs" #>
-
-<#@ assembly name="/home/yifan/repos/tools/src/Uania.Tools.T4Sample/bin/Debug/net6.0/Npgsql.dll" #>
-<#@ import namespace="Npgsql" #>
-<#@ assembly name="/home/yifan/.nuget/packages/system.runtime/4.3.1/ref/netcore50/System.Runtime.dll" #>
-<#@ assembly name="/usr/share/dotnet/packs/Microsoft.NETCore.App.Ref/6.0.1/ref/net6.0/System.ComponentModel.Primitives.dll" #>
+<#@ assembly name="/home/yifan/repos/tools/src/Uania.Tools.T4Sample/bin/Debug/net6.0/Uania.Tools.T4Sample.dll" #>
+<#@ import namespace="Uania.Tools.T4Sample.Common" #>
+<#@ import namespace="System" #>
 <#
     string ns = "Uania.Tools.Repository.Entities";
     string baseEntity = "SportsTestingBaseEntity";
 
-	string connString = "Server=42.192.81.162;Port=5432;Database=sports_testing;User Id=postgres;Password=123456;Timeout=30;Pooling=true;MaxPoolSize=100;";
-    NpgsqlConnection conn = new NpgsqlConnection(connString);
+	Portgres provider = new Portgres();
 #>
