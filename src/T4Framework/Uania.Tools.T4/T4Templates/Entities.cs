@@ -1,17 +1,67 @@
-﻿namespace Uania.Tools.Repository.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Uania.Tools.Repository.Entities
 {
-    public class sports_testing_users
+    [Table("sports_testing_users")]
+    public class SportsTestingUsers  : SportsTestingBaseEntity
     {
-        // 获取列信息
-        public string id {get; set;}
-        public string user_name {get; set;}
-        public string user_phone {get; set;}
-        public string user_email {get; set;}
-        public string user_state {get; set;}
-        public string user_role {get; set;}
-        public string is_delete {get; set;}
-        public string create_time {get; set;}
-        public string last_update_time {get; set;}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        [Column("user_name")]
+        public string UserName {get; set;}
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        [Column("user_phone")]
+        public string UserPhone {get; set;}
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        [Column("user_email")]
+        public string UserEmail {get; set;}
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        [Column("user_state")]
+        public int UserState {get; set;}
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        [Column("user_role")]
+        public int UserRole {get; set;}
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        [Column("is_delete")]
+        public bool IsDelete {get; set;}
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        [Column("create_time")]
+        public DateTime CreateTime {get; set;}
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        [Column("last_update_time")]
+        public DateTime LastUpdateTime {get; set;}
+        
     
     }
 }      
+
