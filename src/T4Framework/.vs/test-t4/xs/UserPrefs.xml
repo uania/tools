@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{167E2583-BD97-4262-BA4A-63BA036583BA}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Uania.Tools.T4/T4Templates/Entities.cs">
+    <Files>
+      <File FileName="Uania.Tools.T4/T4Templates/Entities.tt" Line="38" Column="37" />
+      <File FileName="Uania.Tools.T4/T4Templates/Entities.cs" Line="7" Column="5" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="test-t4" expanded="True">
+            <Node name="Uania.Tools.T4" expanded="True">
+              <Node name="Properties" expanded="True" />
+              <Node name="T4Templates" expanded="True">
+                <Node name="Entities.tt" expanded="True">
+                  <Node name="Entities.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Uania.Tools.T4 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

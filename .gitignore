@@ -16,4 +16,6 @@ src/Uania.Tools.TestConsole/bin/*
 src/Uania.Tools.TestConsole/obj/*
 src/Uania.Tools.T4Sample/bin/*
 src/Uania.Tools.T4Sample/obj/*
+src/T4Framework/Uania.Tools.T4/bin/*
+src/T4Framework/Uania.Tools.T4/obj/*
 src/.vs/SportsTesting/xs/UserPrefs.xml

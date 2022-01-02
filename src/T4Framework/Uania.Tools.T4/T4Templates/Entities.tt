@@ -1,0 +1,54 @@
+﻿<#@ template language="C#" hostspecific="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(ProjectDir)/bin/Debug/Npgsql.dll" #>
+<#@ assembly name="$(SolutionDir)/packages/NETStandard.Library.2.0.3/build/netstandard2.0/ref/netstandard" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Npgsql" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Data" #>
+<#@ output extension=".cs" #>
+<#
+    string ns = "Uania.Tools.Repository.Entities";
+    string baseEntity = "SportsTestingBaseEntity";
+    
+    var path = Host.ResolveAssemblyReference("$(SolutionDir)");
+    var connString = "Server=42.192.81.162;Port=5432;Database=sports_testing;User Id=postgres;Password=123456;Timeout=30;Pooling=true;MaxPoolSize=100;";
+    var conn = new NpgsqlConnection(connString);
+    var command = new NpgsqlCommand("SELECT table_catalog,table_schema,table_name FROM INFORMATION_SCHEMA.TABLES where table_catalog = 'sports_testing' and table_schema = 'public';", conn);
+    var da = new NpgsqlDataAdapter();
+    da.SelectCommand = command;
+    var ds = new DataSet();
+    da.Fill(ds);
+    var dt = ds.Tables[0];
+    // 获取表信息
+    foreach (DataRow dr in dt.Rows)
+    {
+#>
+namespace <#= ns #>
+{
+    public class <#= dr[2] #>
+    {
+        // 获取列信息
+<#
+        var querySql = "SELECT c.relname,A.attname,col_description(A.attrelid,A.attnum) AS description, format_type ( A.atttypid, A.atttypmod ) AS atttype, CASE WHEN A.attnotnull='f' THEN '0' ELSE '1' END AS isrequired,  a.attnum  FROM  pg_class AS c,  pg_attribute AS a WHERE A.attrelid = C.oid  AND A.attnum > 0  and c.relname = '"+ dr[2] +"'ORDER BY c.relname,a.attnum;";
+        var command1 = new NpgsqlCommand(querySql, conn);
+        var da1 = new NpgsqlDataAdapter();
+        da1.SelectCommand = command1;
+        var ds1 = new DataSet();
+        da1.Fill(ds1);
+        var dt1 = ds1.Tables[0];
+        foreach (DataRow dr1 in dt1.Rows)
+        {
+#>
+        public string <#= dr1["attname"] #> {get; set;}
+<#                   
+        }
+#>
+    
+    }
+}      
+<#
+    }
+#>

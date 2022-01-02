@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uania.Tools.T4", "Uania.Tools.T4\Uania.Tools.T4.csproj", "{167E2583-BD97-4262-BA4A-63BA036583BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{167E2583-BD97-4262-BA4A-63BA036583BA}.Debug|x86.ActiveCfg = Debug|x86
+		{167E2583-BD97-4262-BA4A-63BA036583BA}.Debug|x86.Build.0 = Debug|x86
+		{167E2583-BD97-4262-BA4A-63BA036583BA}.Release|x86.ActiveCfg = Release|x86
+		{167E2583-BD97-4262-BA4A-63BA036583BA}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+EndGlobal
