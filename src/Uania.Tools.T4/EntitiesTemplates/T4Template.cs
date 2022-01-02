@@ -1,1 +1,0 @@
-﻿namespace Uania.Tools.Repository.Entities
