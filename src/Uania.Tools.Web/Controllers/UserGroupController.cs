@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Uania.Tools.Services.RepositoryServices.UserGroup;
 using Uania.Tools.Models.UserGroup;
-using Uania.Tools.Web.Models.Response;
+using Uania.Tools.Models.Wrapper;
 
 namespace Uania.Tools.Web.Controllers
 {
@@ -19,12 +19,12 @@ namespace Uania.Tools.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ResponseBase<List<UserGroupUsers>>> GetUsers()
+        public async Task<RespListWrapper<UserGroupUsers>> GetUsers()
         {
             var users = await _userGroupServices.GetUserGroupUsers();
-            var res = new ResponseBase<List<UserGroupUsers>>
+            var res = new RespListWrapper<UserGroupUsers>
             {
-                Code = ResponseCodeEnum.Success,
+                Code = 1,
                 Message = "请求成功",
                 Data = users
             };
@@ -36,12 +36,12 @@ namespace Uania.Tools.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ResponseBase<List<UserGroupApply>>> GetApplys()
+        public async Task<RespListWrapper<UserGroupApply>> GetApplys()
         {
             var applys = await _userGroupServices.GetUserGroupApplys();
-            var res = new ResponseBase<List<UserGroupApply>>
+            var res = new RespListWrapper<UserGroupApply>
             {
-                Code = ResponseCodeEnum.Success,
+                Code = 1,
                 Message = "请求成功",
                 Data = applys
             };
@@ -53,12 +53,12 @@ namespace Uania.Tools.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ResponseBase<string>> EntryptData()
+        public async Task<RespWrapper<string>> EntryptData()
         {
             var message = await _userGroupServices.EntryptData();
-            var res = new ResponseBase<string>
+            var res = new RespWrapper<string>
             {
-                Code = ResponseCodeEnum.Success,
+                Code = 1,
                 Message = "请求成功",
                 Data = message
             };
@@ -70,12 +70,12 @@ namespace Uania.Tools.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ResponseBase<string>> DetryptData()
+        public async Task<RespWrapper<string>> DetryptData()
         {
             var message = await _userGroupServices.DetryptData();
-            var res = new ResponseBase<string>
+            var res = new RespWrapper<string>
             {
-                Code = ResponseCodeEnum.Success,
+                Code = 1,
                 Message = "请求成功",
                 Data = message
             };
@@ -87,12 +87,12 @@ namespace Uania.Tools.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ResponseBase<string>> ReplaceFileUrlWithAws()
+        public async Task<RespWrapper<string>> ReplaceFileUrlWithAws()
         {
             var awsUrl = await _userGroupServices.ReplaceFileUrlWithAws();
-            return new ResponseBase<string>
+            return new RespWrapper<string>
             {
-                Code = ResponseCodeEnum.Success,
+                Code = 1,
                 Message = "请求成功",
                 Data = awsUrl
             };
