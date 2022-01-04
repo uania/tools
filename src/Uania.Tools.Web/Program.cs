@@ -12,6 +12,10 @@ builder.Logging.ClearProviders();
 builder.Logging.AddLog4Net();
 // Add services to the container.
 builder.Services.RegisterService(builder.Configuration);
+// Add Cors
+builder.Services.AddCors(option=>option.AddPolicy("cors", 
+    policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(option =>
                 {
@@ -70,7 +74,7 @@ var options = new DefaultFilesOptions();
 options.DefaultFileNames.Add("index.html");
 app.UseDefaultFiles(options);
 app.UseStaticFiles();
-
+app.UseCors("cors");
 app.UseAuthentication();
 app.UseAuthorization();
 
