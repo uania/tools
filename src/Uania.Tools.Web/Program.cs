@@ -7,14 +7,22 @@ using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("defaultCors",
+        builder =>
+        {
+            builder.AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true); // allow any origin
+        });
+});
 // Add log4net
 builder.Logging.ClearProviders();
 builder.Logging.AddLog4Net();
 // Add services to the container.
 builder.Services.RegisterService(builder.Configuration);
-// Add Cors
-builder.Services.AddCors(option=>option.AddPolicy("cors", 
-    policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(option =>
@@ -56,7 +64,7 @@ builder.Services.AddSwaggerGen(option =>
         Type = SecuritySchemeType.ApiKey,
         Description = "Authorization:Bearer {your JWT token},注意两者之间是一个空格",
     });
-　　　　#endregion
+    #endregion
 });
 
 var app = builder.Build();
@@ -74,7 +82,7 @@ var options = new DefaultFilesOptions();
 options.DefaultFileNames.Add("index.html");
 app.UseDefaultFiles(options);
 app.UseStaticFiles();
-app.UseCors("cors");
+app.UseCors("defaultCors");
 app.UseAuthentication();
 app.UseAuthorization();
 
