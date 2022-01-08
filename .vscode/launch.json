@@ -4,7 +4,6 @@
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
             "name": ".NET Core Launch (T4Sample)",
             "type": "coreclr",
@@ -51,6 +50,7 @@
             "name": ".NET Core Launch (admin)",
             "type": "coreclr",
             "request": "launch",
+            "requireExactSource": false,
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/Uania.Tools.Admin/bin/Debug/net6.0/Uania.Tools.Admin.dll",
             "args": [],

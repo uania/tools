@@ -10,4 +10,8 @@
   <ItemGroup>
     <PackageReference Include="Npgsql" Version="6.0.2" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Uania.Tools.Infrastructure/Uania.Tools.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>

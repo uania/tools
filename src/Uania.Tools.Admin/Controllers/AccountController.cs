@@ -28,7 +28,8 @@ namespace Uania.Tools.Admin.Controllers
         [AllowAnonymous]
         public async Task<RespWrapper<LoginResp>> SignIn(ReqWapper<LoginRes> res)
         {
-            if (res == null || res.Params == null || res.Params.Phone == null)
+            if (res == null || res.Params == null
+            || string.IsNullOrWhiteSpace(res.Params.Phone) || string.IsNullOrWhiteSpace(res.Params.Password))
             {
                 return new RespWrapper<LoginResp>(code: -100, message: "入参为不能为null");
             }
@@ -41,6 +42,11 @@ namespace Uania.Tools.Admin.Controllers
                     return new RespWrapper<LoginResp>(code: -100, message: "未找到用户");
                 }
 
+                var isValid = _stAccountServices.ValidPassword(res.Params.Password, userInfo.Password ?? string.Empty);
+                if (!isValid)
+                {
+                    return new RespWrapper<LoginResp>(code: -100, message: "密码有误，请重试！");
+                }
                 var claims = new Claim[]{
                         new Claim("Id", userInfo?.UserPhone??string.Empty),
                         new Claim("Name", userInfo?.UserName??string.Empty)

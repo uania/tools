@@ -1,4 +1,4 @@
-using System.Linq.Expressions;
+using Uania.Tools.Infrastructure.MD5Services;
 using AutoMapper;
 using Uania.Tools.Models.SportsTesting;
 using Uania.Tools.Repository.Repositories;
@@ -9,11 +9,14 @@ namespace Uania.Tools.Services.RepositoryServices.SportsTestingAccount.Impl
     {
         private readonly ISportsTestingUsersRepository _stAccountRepo;
         private readonly IMapper _mapper;
+        private readonly IMD5Service _md5Service;
         public STAccountServiceImpl(ISportsTestingUsersRepository stAccountRepo
-        , IMapper mapper)
+        , IMapper mapper
+        , IMD5Service mD5Service)
         {
             _stAccountRepo = stAccountRepo;
             _mapper = mapper;
+            _md5Service = mD5Service;
         }
 
         public async Task<SportsTestingUsers?> GetUserInfo(string phone)
@@ -26,6 +29,13 @@ namespace Uania.Tools.Services.RepositoryServices.SportsTestingAccount.Impl
             }
 
             return res;
+        }
+
+        public bool ValidPassword(string plainPassword, string cipherPassword)
+        {
+            var isValid = _md5Service.CompairWithSaltText(plainPassword, cipherPassword);
+
+            return isValid;
         }
     }
 }

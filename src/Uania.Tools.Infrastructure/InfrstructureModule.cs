@@ -12,6 +12,8 @@ using Uania.Tools.Infrastructure.HttpServices;
 using Uania.Tools.Infrastructure.HttpServices.Impl;
 using Uania.Tools.Infrastructure.JwtServices;
 using Uania.Tools.Infrastructure.JwtServices.Impl;
+using Uania.Tools.Infrastructure.MD5Services;
+using Uania.Tools.Infrastructure.MD5Services.Impl;
 
 namespace Uania.Tools.Infrastructure
 {
@@ -38,7 +40,8 @@ namespace Uania.Tools.Infrastructure
             services.AddSingleton<IRegValidatorServices, RegValidatorServicesImpl>();
             services.AddSingleton<IFileUpdateServices, FileUpdateAwsServicesImpl>(sp => new FileUpdateAwsServicesImpl(sp.GetService<IOptions<Configs.AmazonS3Config>>()));
             services.AddSingleton<IHttpServices, HttpServicesImpl>();
-            services.AddSingleton<IJwtServices,JwtServicesImpl>();
+            services.AddSingleton<IJwtServices, JwtServicesImpl>();
+            services.AddSingleton<IMD5Service, MD5ServiceImpl>();
         }
 
         /// <summary>
