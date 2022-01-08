@@ -4,6 +4,7 @@
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": ".NET Core Launch (T4Sample)",
             "type": "coreclr",
@@ -34,6 +35,26 @@
             "program": "${workspaceFolder}/src/Uania.Tools.Web/bin/Debug/net6.0/Uania.Tools.Web.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/Uania.Tools.Web",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": ".NET Core Launch (admin)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Uania.Tools.Admin/bin/Debug/net6.0/Uania.Tools.Admin.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/Uania.Tools.Admin",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
