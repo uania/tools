@@ -33,5 +33,12 @@ namespace Uania.Tools.Services.RepositoryServices.UserGroup
         /// </summary>
         /// <returns></returns>
         public Task<string> ReplaceFileUrlWithAws();
+
+        /// <summary>
+        /// 加密指定id的leader申请表
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public Task<string> EntrytApplyData(List<Guid>  ids);
     }
 }

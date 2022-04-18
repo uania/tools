@@ -233,5 +233,43 @@ namespace Uania.Tools.Services.RepositoryServices.UserGroup.Impl
             }
             return activities?.FirstOrDefault()?.BannerList ?? string.Empty;
         }
+
+        /// <summary>
+        /// 加密指定id的leader申请表
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public async Task<string> EntrytApplyData(List<Guid> ids)
+        {
+            int applyAffected = 0;
+            //处理leader申请表
+            var originApplyData = await _userGroupApplyRepository.GetListAsync(r => ids.Contains(r.Id));
+            if (originApplyData != null && originApplyData.Any())
+            {
+                var applys = new List<Repository.Entities.UserGroupApply>();
+                foreach (var apply in originApplyData)
+                {
+                    if (_regValidatorServices.IsPhoneNumber(apply.Phone) && _regValidatorServices.IsEmail(apply.Email))
+                    {
+                        if (!string.IsNullOrWhiteSpace(apply.Name))
+                            apply.Name = _rijndaelService.EncryptString(apply.Name);
+                        if (!string.IsNullOrWhiteSpace(apply.Email))
+                            apply.Email = _rijndaelService.EncryptString(apply.Email);
+                        if (!string.IsNullOrWhiteSpace(apply.Phone))
+                            apply.Phone = _rijndaelService.EncryptString(apply.Phone);
+                        if (!string.IsNullOrWhiteSpace(apply.Company))
+                            apply.Company = _rijndaelService.EncryptString(apply.Company);
+
+                        applys.Add(apply);
+                    }
+                }
+                if (applys.Any())
+                {
+                    applyAffected = await _userGroupApplyRepository.Update(applys);
+                }
+            }
+
+            return $"apply表加密{applyAffected}行；";
+        }
     }
 }

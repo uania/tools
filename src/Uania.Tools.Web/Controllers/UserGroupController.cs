@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Uania.Tools.Services.RepositoryServices.UserGroup;
 using Uania.Tools.Models.UserGroup;
 using Uania.Tools.Models.Wrapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Uania.Tools.Web.Controllers
 {
@@ -96,6 +97,25 @@ namespace Uania.Tools.Web.Controllers
                 Message = "请求成功",
                 Data = awsUrl
             };
+        }
+
+        /// <summary>
+        /// 加密指定id的leader申请数据
+        /// </summary>
+        /// /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<RespWrapper<string>> DetryptApplyData(List<Guid> ids)
+        {
+            var message = await _userGroupServices.EntrytApplyData(ids);
+            var res = new RespWrapper<string>
+            {
+                Code = 1,
+                Message = "请求成功",
+                Data = message
+            };
+            return res;
         }
     }
 }
